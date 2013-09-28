@@ -2,7 +2,7 @@ h1. RepRap 3DM1
 
 h3. derived from RepRap Wallace
 
-!http://uploads.makevoid.com/3dm1_scad.png!
+!http://uploads.makevoid.com/3dm1_scad2.png!
 
 
 
