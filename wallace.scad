@@ -281,7 +281,23 @@ module x_carriage() {
 
 module x_end(motor = 0) mirror([(motor == 0) ? 1 : 0, 0, 0]) difference() {
 	union() {
-    //# translate([-10, -10, 38]) cube([20, 8, 8]);
+    // Z endstop bed calibration screw
+    if (motor == 0) {
+      translate([-7, -15, 40]) {
+        difference() {
+          union () {
+            cube([14, 13, 6]);
+            translate([7, 0, 0]) cylinder(6, 7, 7);
+          }
+
+         translate([7, 0, 7]) rotate([180, 0, 0]) {
+          cylinder(r = m3_size * da6, h = 100, center = true, $fn = 6);
+            translate([0, 0, bearing_size / 4 + .5]) cylinder(r = m3_nut_size * da6, h = 100, center = false, $fn = 6);
+          }
+        }
+      }
+    }
+
 		if(motor > 0) translate([-(motor_casing / 2 + rod_size + bearing_size + 8) / 2 - motor_casing, 8 + rod_size, 0]) rotate([90, 0, 0]) {
 			// Motor holder
 			linear_extrude(height = 7) difference() {
