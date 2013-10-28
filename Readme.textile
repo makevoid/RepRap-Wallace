@@ -11,7 +11,7 @@ h2. Main changes:
 - X carriage now supports JHead and other shorter heads
 - added Z endstop screw for bed leveling on X end right (motor one)
 - todo: add Y endstop holder integrated
-
+- todo: remove Z coupler (aluminium ones are better)
 
 
 h3. ToDo:
