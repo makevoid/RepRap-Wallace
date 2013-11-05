@@ -1,4 +1,4 @@
-include <wallace.scad>;
+include <3dm1.scad>;
 include <pulley with collar.scad>;
 
 !translate() {

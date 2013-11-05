@@ -11,7 +11,8 @@ bed_mount_height = 16;
 //x_rod_spacing = motor_screw_spacing + 3 + rod_size;
 x_rod_spacing = 30;
 x_carriage_width = 70;
-carriage_extruder_offset = 5;
+carriage_extruder_offset = 2; // was 5
+carriage_extruder_offset_x = 8;
 pulley_size = 20;
 idler_pulley_width = 10;
 gusset_size = 15;
@@ -19,6 +20,9 @@ m3_size = 3;
 m3_nut_size = 6;
 m4_size = 4;
 motor_shaft_size = 5;
+mkv_endstop_height = 8;
+
+
 
 
 // ratio for converting diameter to apothem
@@ -29,7 +33,7 @@ da8 = 1 / cos(180 / 8) / 2;
 
 //!base_end();
 //!for(b = [0:1]) mirror([0, b, 0]) for(a = [-1,1]) translate([a * bearing_size / 4, bearing_size - (bearing_size * 2/3) * a, 0]) rotate(90 + 90 * a) y_bearing_retainer();
-//!for(b = [0:1]) mirror([0, b, 0]) for(a = [-1,1]) translate([a * -7.5, 18 - 5 * a, 0]) rotate(180 + 90 * a) bed_mount();
+//!bed_mounts();
 //!x_end(2);
 //!x_end(0);
 //!x_carriage();
@@ -193,7 +197,7 @@ module x_carriage() {
   				}
 
   				// mounting parte
-  				#rotate(180) translate([0, mkv_z_mod-x_rod_spacing / 2 - bearing_size / 2 - 4, 0]) square([bearing_size / 2 + 4 + 28, bearing_size / 2 + 4 + 3]);
+  				rotate(180) translate([0, mkv_z_mod-x_rod_spacing / 2 - bearing_size / 2 - 4, 0]) square([bearing_size / 2 + 4 + 28, bearing_size / 2 + 4 + 3]);
 
   				for(side = [1, -1]) translate([0, side * x_rod_spacing / 2, 0]) circle(bearing_size / 2 + 4, $fn = 30);
   			}
@@ -261,18 +265,26 @@ module x_carriage() {
 
 
   	//#for(side = [1, -1]) translate([-bearing_size / 2 - 4 - 14, 0, x_carriage_width / 2 + carriage_extruder_offset + side * 25]) rotate([90, 0, 0]) cylinder(r = 4.1, h = x_rod_spacing - 10, center = true, $fn = 6);
-
-  	translate([-bearing_size / 2 - 4 - 14, 0, x_carriage_width / 2 + carriage_extruder_offset]) rotate([90, 0, 0]) linear_extrude(height = bearing_size + x_rod_spacing + 10, center = true, convexity = 5) {
+  	translate([-bearing_size / 2 - 4 - 14 - carriage_extruder_offset_x, 0, x_carriage_width / 2 + carriage_extruder_offset]) rotate([90, 0, 0]) linear_extrude(height = bearing_size + x_rod_spacing + 10, center = true, convexity = 5) {
   		*translate([-14, 0, 0]) {
   			circle(20);
   			rotate(45) square(5);
   		}
 
-    	// extruder place
+
   		intersection() {
-  			translate([14, 0, 0]) rotate(135) square(100);
-  			translate([-14, 0, 0]) square([56, 100], center = true);
+  		  // extruder place: Jhead
+  		  //translate([14, 0, 0]) rotate(135) square(100);
+
+    	  // extruder place: Buda
+    	  union(){
+      	  translate([17, 0, 0]) rotate(135) square(100);
+          #translate([-2, 0, 0]) rotate(135)  circle(21);
+    	  }
+
+  			translate([-10, 0, 0]) square([56, 100], center = true);
   		}
+
 
   		for(side = [1, -1]) translate([0, side * 25, 0]) circle(m4_size * da6, $fn = 6);
   	}
@@ -367,19 +379,26 @@ module x_end(motor = 0) mirror([(motor == 0) ? 1 : 0, 0, 0]) difference() {
 	translate([(motor_casing / 4 + rod_size / 2), 0, 5]) %rotate(180 / 8) cylinder(r = rod_size * da8, h = 200, center = true, $fn = 8);
 }
 
-module bed_mount() difference() {
-	linear_extrude(height = 10, convexity = 5) difference() {
-		union() {
-			rotate(180 / 8) circle((rod_size + 8) * da8, $fn = 8);
-			translate([0, -rod_size / 2 - 4, 0]) square([rod_size / 2 + 8, max(rod_size + 8, rod_size / 2 + 4 + bed_mount_height)]);
-		}
-		rotate(180 / 8) circle(rod_size * da8, $fn = 8);
-		translate([0, -rod_size / (1 + sqrt(2)) / 2, 0]) square([rod_size + 10, rod_size / (1 + sqrt(2))]);
-	}
-	translate([rod_size / 2 + 1.5, -rod_size / 2 - 6, 5]) rotate([-90, 0, 0]) {
-		cylinder(r = m3_size * da6, h = max(rod_size + 12, rod_size / 2 + 7 + bed_mount_height, $fn = 6));
-		cylinder(r = m3_nut_size * da6, h = 4, $fn = 6);
-	}
+module bed_mount(holder=false) {
+  union() {
+    //if (holder)
+    //  enstop_holder();
+
+    difference() {
+    	linear_extrude(height = 14, convexity = 5) difference() {
+    		union() {
+    			rotate(180 / 8) circle((rod_size + 8) * da8, $fn = 8);
+    			translate([0, -rod_size / 2 - 4, 0]) square([rod_size / 2 + 8, max(rod_size + 8, rod_size / 2 + 4 + mkv_endstop_height + bed_mount_height)]);
+    		}
+    		rotate(180 / 8) circle(rod_size * da8, $fn = 8);
+    		translate([0, -rod_size / (1 + sqrt(2)) / 2, 0]) square([rod_size + 10, rod_size / (1 + sqrt(2))]);
+    	}
+    	translate([rod_size / 2 + 1.5, -rod_size / 2 - 6, 7]) rotate([-90, 0, 0]) {
+    		cylinder(r = m3_size * da6, h = max(rod_size + 12, rod_size / 2 + 7 + mkv_endstop_height + bed_mount_height, $fn = 6));
+    		cylinder(r = m3_nut_size * da6, h = 4, $fn = 6);
+    	}
+    }
+  }
 }
 
 module y_bearing_retainer() intersection() {
@@ -441,4 +460,20 @@ module base_end() difference() {
 	}
 	translate([0, 0, end_height - rod_size * 1.5]) rotate([90, 180 / 8, 0]) cylinder(r = rod_size * da8, h = motor_casing + rod_size * 5, $fn = 8, center = true);
 	%translate([0, 0, end_height - rod_size * 1.5]) rotate([90, 180 / 8, 0]) cylinder(r = rod_size * da8, h = 100, $fn = 8, center = true);
+}
+
+module enstop_holder() {
+
+  rotate([90, 0, 90]) translate([11+mkv_endstop_height, 10, 0])difference() {
+    cube([5,23,12]);  //4,45,10
+    translate([-10, 8, 6]) rotate(a=[0, 90, 0]) cylinder(h = 30, r = 1, $fn= 6);
+    translate([-10, 18, 6]) rotate(a=[0, 90, 0]) cylinder(h = 30, r = 1, $fn= 6);
+  }
+
+}
+
+module bed_mounts() {
+   mirror([0, 0, 0]) for(a = [-1,1]) translate([a * -7.5, 18 - 5 * a, 0]) rotate(180 + 90 * a) bed_mount();
+ mirror([0, 1, 0]) translate([-7.5, 18 - 5, 0]) rotate(180 + 90) bed_mount();
+ mirror([0, 1, 0]) translate([+7.5, 18 + 5, 0]) rotate(180 - 90 * a) bed_mount(true);
 }
