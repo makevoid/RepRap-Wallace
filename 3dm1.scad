@@ -176,9 +176,12 @@ module leadscrew_coupler() difference() {
 	translate([0, 0, 10]) cylinder(r = rod_nut_size / 2, h = rod_nut_size + 1, $fn = 6);
 	//translate([0, 0, -1]) cube(100);
 }
+//  versione = "jhead"
+//  versione = "buda"
 
-mkv_z_mod = 15; // 24
-mkv_linear1_mod = 8; // 0
+mkv_z_mod       = 6.5;    // 6.5 (buda) // 15 (jhead) // 24 (note)
+mkv_linear1_mod = 0;      // 0 (buda) // 8 (jhead)
+plate_buda_extra_x = 8;  // 10 (buda) // 0 (jhead)
 mkv_depth_two = 2;
 mkv_depth = 8;
 
@@ -195,9 +198,10 @@ module x_carriage() {
   					square([bearing_size / 2 + 4 + 15, 8]);
   					translate([bearing_size / 2 + 4 + 15, 4, 0]) circle(4);
   				}
-
-  				// mounting parte
-  				rotate(180) translate([0, mkv_z_mod-x_rod_spacing / 2 - bearing_size / 2 - 4, 0]) square([bearing_size / 2 + 4 + 28, bearing_size / 2 + 4 + 3]);
+          
+          
+  				// mounting part
+  				rotate(180) translate([0, mkv_z_mod-x_rod_spacing / 2 - bearing_size / 2 - 4, 0]) square([bearing_size / 2 + 4 + 28 + plate_buda_extra_x, bearing_size / 2 + 4 + 3]);
 
   				for(side = [1, -1]) translate([0, side * x_rod_spacing / 2, 0]) circle(bearing_size / 2 + 4, $fn = 30);
   			}
@@ -279,7 +283,7 @@ module x_carriage() {
     	  // extruder place: Buda
     	  union(){
       	  translate([17, 0, 0]) rotate(135) square(100);
-          #translate([-2, 0, 0]) rotate(135)  circle(21);
+          translate([-4, 0, 0]) scale([1, 1.05]) rotate(135)    circle(21);
     	  }
 
   			translate([-10, 0, 0]) square([56, 100], center = true);
