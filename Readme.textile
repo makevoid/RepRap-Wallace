@@ -2,21 +2,36 @@ h1. RepRap 3DM1
 
 h3. derived from RepRap Wallace
 
-!http://uploads.makevoid.com/3dm1_scad2.png!
-
-
+!http://uploads.makevoid.com/3dm1_buda.png!
 
 h2. Main changes:
 
-- X carriage now supports JHead and other shorter heads
+- X carriage now supports Buda, JHead and other shorter heads
 - added Z endstop screw for bed leveling on X end right (motor one)
-- todo: add Y endstop holder integrated
-- todo: remove Z coupler (aluminium ones are better)
+- todo: add Y endstop holder integrated to bed feet
+- removed Z couplers and pulleys, we use aluminium Z couplers and X,Y, and small bearings instead of Y idler pulleys
 
+h3. Alpha version:
+
+!http://3dmaking.it/img/3dm1_alpha.jpg!
+
+
+photos of production version coming soon!
+
+
+h3. Misc:
+
+- Sanguinololu box (made with sketchup by @donpeppe)
+- small gear adjusted for different flows
+- Acrylic (plexiglas) build plate and underbed
 
 h3. ToDo:
 
 - Include Greg Wade's extruder in the project
-- Better building manual than http://reprap.org/wiki/Wallace_Build_Manual (that has no pictures but it's well explained)
-- Sanguinololu box
-- Melzi Ardentissimo box
+- Better building manual than http://reprap.org/wiki/Wallace_Build_Manual (that has no pictures but it's well explained) - still todo!!!
+- Melzi Ardentissimo box (maybe)
+
+
+
+h3. "More info":http://en.3dmaking.it/printer_3dm1
+
