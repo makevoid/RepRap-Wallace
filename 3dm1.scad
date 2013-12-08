@@ -37,9 +37,7 @@ da8 = 1 / cos(180 / 8) / 2;
 //!x_end(2);
 //!x_end(0);
 //!x_carriage();
-//!for(side = [-1,1]) translate([0, side * motor_screw_spacing / 2, 0]) leadscrew_coupler();
 //!y_idler();
-//!for(x = [1, -1]) for(y = [1, -1]) translate([x * (pulley_size / 2 + 3), y * (pulley_size / 2 + 3), 0]) idler_pulley(true);
 //!for(x = [1, -1]) for(y = [1, -1]) translate([x * (rod_size * 1.5 + 2), y * (rod_size * 1.5 + 2), 0]) foot();
 //!for(side = [0, 1]) mirror([side, 0, 0]) translate([-rod_size * 2.5, 0, 0]) z_top_clamp();
 
@@ -52,7 +50,6 @@ da8 = 1 / cos(180 / 8) / 2;
 	translate([-yz_motor_distance / 2 + rod_size - motor_casing / 4 - rod_size / 2, 0, 60 + (x_rod_spacing + 8 + rod_size) / 2]) rotate([0, 180, 0]) x_end(0);
 	translate([140, 0, 60 + (x_rod_spacing + 8 + rod_size) / 2]) rotate([0, 180, 0]) {
 		x_end(2);
-		translate([0, 8 + rod_size, 0]) rotate([90, 0, 0]) translate([0, (x_rod_spacing + 8 + rod_size) / 2, rod_size / 2 - 2 - bearing_size / 2 - 4 - idler_pulley_width - 1.5]) idler_pulley(true);
 	}
 	translate([40, rod_size + bearing_size / 2 + 1 - rod_size / 2 + 2, 60]) {
 		rotate([90, 0, 90]) x_carriage();
@@ -61,10 +58,8 @@ da8 = 1 / cos(180 / 8) / 2;
 			%rotate(180 / 8) cylinder(r = 2, h = 150, center = true, $fn = 8);
 		}
 	}
-	translate([-yz_motor_distance / 2 - motor_casing / 2, 0, -bearing_size / 2]) leadscrew_coupler();
 	translate([60, 0, -bearing_size - rod_size / 2 - bearing_size / 2]) {
 		rotate([0, 90, 0]) y_idler();
-		for(side = [1, -1]) translate([5, side * (motor_casing / 2 - rod_size / 2), idler_pulley_width + 1.5 + rod_size]) rotate([180, 0, 0]) idler_pulley(true);
 	}
 	for(side = [0, 1]) mirror([0, side, 0]) translate([0, -motor_casing / 2 - rod_size * 2 - 10, -bearing_size - end_height + rod_size * 1.5]) rotate([90, 0, 0]) foot();
 	translate([-yz_motor_distance / 2 + rod_size, 0, 210 - end_height]) rotate([180, 0, 90]) z_top_clamp(0);
@@ -104,20 +99,6 @@ module foot() difference() {
 	}
 	translate([0, 0, -rod_size / 16]) cylinder(r1 = rod_size * 3/4, r2 = rod_size / 4, h = rod_size / 2, $fn = 12);
 	translate([0, 0, rod_size / 2 + rod_size / 16]) cylinder(r2 = rod_size * 3/4, r1 = rod_size / 4, h = rod_size / 2, $fn = 12);
-}
-
-module idler_pulley(double_bearing = true) difference() {
-	intersection() {
-		linear_extrude(height = idler_pulley_width + 1, convexity = 5) difference() {
-			circle(pulley_size / 2 + 2);
-			circle(5, $fn = 4);
-		}
-		union() {
-			translate([0, 0, idler_pulley_width / 2 + 1]) scale([1, 1, 1.25]) sphere(pulley_size / 2);
-			cylinder(r = pulley_size / 2 + 5, h = 1);
-		}
-	}
-	for(h = [-idler_pulley_width + 4, idler_pulley_width * 2 + 1 - 4]) rotate(180 / 8) translate([0, 0, (double_bearing) ? h:0]) cylinder(r = 10 * da8, h = idler_pulley_width * 2, center = true, $fn = 8);
 }
 
 module y_idler() difference() {
@@ -162,22 +143,11 @@ module y_idler() difference() {
 	}
 }
 
-module leadscrew_coupler() difference() {
-	linear_extrude(height = 10 + rod_nut_size / 2 + 1, convexity = 5) difference() {
-		circle(motor_screw_spacing / 2 - 1);
-		circle(motor_shaft_size * da6, $fn = 6);
-	}
-	translate([0, 0, m3_nut_size / 2]) rotate([-90, 0, 90]) {
-		cylinder(r = m3_size * da6, h = motor_screw_spacing / 2 + 1);
-		%rotate(90) cylinder(r = m3_nut_size / 2, h = 5.5, $fn = 6);
-		translate([0, 0, 12]) cylinder(r = m3_size * da6 * 2, h = motor_screw_spacing / 2);
-		translate([-m3_nut_size / da6 / 4, -m3_nut_size / 2, 0]) cube([m3_nut_size / da6 / 2, m3_nut_size + 1, 5.7]);
-	}
-	translate([0, 0, 10]) cylinder(r = rod_nut_size / 2, h = rod_nut_size + 1, $fn = 6);
-	//translate([0, 0, -1]) cube(100);
-}
-//  versione = "jhead"
-//  versione = "buda"
+
+// Todo: add version variable
+//
+//  version = "jhead"
+//  version = "buda"
 
 mkv_z_mod       = 6.5;    // 6.5 (buda) // 15 (jhead) // 24 (note)
 mkv_linear1_mod = 0;      // 0 (buda) // 8 (jhead)
@@ -198,8 +168,8 @@ module x_carriage() {
   					square([bearing_size / 2 + 4 + 15, 8]);
   					translate([bearing_size / 2 + 4 + 15, 4, 0]) circle(4);
   				}
-          
-          
+
+
   				// mounting part
   				rotate(180) translate([0, mkv_z_mod-x_rod_spacing / 2 - bearing_size / 2 - 4, 0]) square([bearing_size / 2 + 4 + 28 + plate_buda_extra_x, bearing_size / 2 + 4 + 3]);
 
