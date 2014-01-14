@@ -149,9 +149,9 @@ module y_idler() difference() {
 //  version = "jhead"
 //  version = "buda"
 
-mkv_z_mod       = 6.5;    // 6.5 (buda) // 15 (jhead) // 24 (note)
-mkv_linear1_mod = 0;      // 0 (buda) // 8 (jhead)
-plate_buda_extra_x = 8;  // 10 (buda) // 0 (jhead)
+mkv_z_mod       = 15;    // 6.5 (buda) // 15 (jhead) // 24 (note)
+mkv_linear1_mod = 8;      // 0 (buda) // 8 (jhead)
+plate_buda_extra_x = 0;  // 10 (buda) // 0 (jhead)
 mkv_depth_two = 2;
 mkv_depth = 8;
 
@@ -248,13 +248,13 @@ module x_carriage() {
 
   		intersection() {
   		  // extruder place: Jhead
-  		  //translate([14, 0, 0]) rotate(135) square(100);
+  		  translate([14, 0, 0]) rotate(135) square(100);
 
     	  // extruder place: Buda
-    	  union(){
-      	  translate([17, 0, 0]) rotate(135) square(100);
-          translate([-4, 0, 0]) scale([1, 1.05]) rotate(135)    circle(21);
-    	  }
+        // union(){
+        //          translate([17, 0, 0]) rotate(135) square(100);
+        //           translate([-4, 0, 0]) scale([1, 1.05]) rotate(135)    circle(21);
+        // }
 
   			translate([-10, 0, 0]) square([56, 100], center = true);
   		}
