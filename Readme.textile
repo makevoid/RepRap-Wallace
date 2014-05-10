@@ -2,6 +2,9 @@ h1. RepRap 3DM1
 
 h3. derived from RepRap Wallace
 
+!http://3dmaking.it/img/gallery_home/2.jpg!
+
+
 !http://uploads.makevoid.com/3dm1_buda.png!
 
 h2. Main changes:
@@ -11,27 +14,38 @@ h2. Main changes:
 - todo: add Y endstop holder integrated to bed feet
 - removed Z couplers and pulleys, we use aluminium Z couplers and X,Y, and small bearings instead of Y idler pulleys
 
+
+
 h3. Alpha version:
 
 !http://3dmaking.it/img/3dm1_alpha.jpg!
 
 
-photos of production version coming soon!
-
-
 h3. Misc:
 
-- Sanguinololu box (made with sketchup by @donpeppe)
+- Sanguinololu box
 - small gear adjusted for different flows
 - Acrylic (plexiglas) build plate and underbed
 
-h3. ToDo:
+
+
+h3. "More info & link to build instructions":http://en.3dmaking.it/printer_3dm1
+
+
+h3. Contributors:
+
+3DMaking:
+
+@makevoid
+@donpeppe
+
+
+h3. ToDo / to publish:
 
 - Include Greg Wade's extruder in the project
-- Better building manual than http://reprap.org/wiki/Wallace_Build_Manual (that has no pictures but it's well explained) - still todo!!!
-- Melzi Ardentissimo box (maybe)
-
-
-
-h3. "More info":http://en.3dmaking.it/printer_3dm1
-
+- minitronics box
+- new stls
+- publish stls of variants
+- bigger studs variant (m10 / m12)
+- ball screw variant
+- Z with m5 variant
