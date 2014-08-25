@@ -9,10 +9,21 @@ h3. derived from RepRap Wallace
 
 h2. Main changes:
 
-- X carriage now supports Buda, JHead and other shorter heads
-- added Z endstop screw for bed leveling on X end right (motor one)
-- todo: add Y endstop holder integrated to bed feet
-- removed Z couplers and pulleys, we use aluminium Z couplers and X,Y, and small bearings instead of Y idler pulleys
+
+- X carriage reworked for small jhead - github.com/makevoid/RepRap_3DM1/blob/master/stl/x_carriage_jhead.stl
+- X carriage alternative for buda heads - github.com/makevoid/RepRap_3DM1/blob/master/stl/x_carriage_buda.stl
+- Y belt tensioner, to apply to the end of Y's acrylic plate - github.com/makevoid/RepRap_3DM1/blob/master/stl/belt_tensioner_custom.stl
+- bed mounts are a little taller - github.com/makevoid/RepRap_3DM1/blob/master/stl/bed_mounts.stl
+- X end left with Z adjustment screw - github.com/makevoid/RepRap_3DM1/blob/master/stl/x_end_left.stl ( we actually don't use it much :D )
+- spool holder: thingiverse.com/thing:440287
+- removed Z couplers and pulleys, we use aluminium Z couplers and X,Y, and small bearings (623 or 624) instead of Y idler pulleys
+
+
+-- default extruder(s) selected and included in the project github.com/makevoid/RepRap_3DM1/tree/master/extruders ( so noobs know what to print :) )
+-- fan mount, endstop, washers github.com/makevoid/RepRap_3DM1/tree/master/extra etc 
+-- firmware changes and optimization (lowered jerk and accelerations): github.com/makevoid/3DM_Marlin_firmware 
+
+we print almost exclusively PLA, applying glue directly on acrylic that works great or glue + large painter tape
 
 
 
