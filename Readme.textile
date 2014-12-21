@@ -9,6 +9,7 @@ h3. derived from RepRap Wallace
 
 h2. Main changes:
 
+STL diff: https://github.com/makevoid-3D/RepRap-Wallace/commit/0ecb856435821e9576158b46b164370751ca285a (thanks github!)
 
 - X carriage reworked for small jhead - github.com/makevoid/RepRap_3DM1/blob/master/stl/x_carriage_jhead.stl
 - X carriage alternative for buda heads - github.com/makevoid/RepRap_3DM1/blob/master/stl/x_carriage_buda.stl
