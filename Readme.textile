@@ -49,5 +49,5 @@ h3. Contributors:
 3DMaking:
 
 @makevoid
-@donpeppe (the mithical)
+@donpeppe (the mythical)
 
