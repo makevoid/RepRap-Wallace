@@ -27,10 +27,10 @@ STL diff: https://github.com/makevoid-3D/RepRap-Wallace/commit/0ecb856435821e957
 we print almost exclusively PLA, applying glue directly on acrylic that works great or glue + large painter tape
 
 
+a delta and clay version of this approach would be good - this was years ago - now we recommend these printers:
 
-h3. Alpha version:
-
-!http://3dmaking.it/img/3dm1_alpha.jpg!
+- http://www.thingiverse.com/thing:318745 (simplified, with short bowden instead of direct extruder, but vslots are cool)
+- http://www.thingiverse.com/thing:147055 style for clay
 
 
 h3. Misc:
@@ -41,7 +41,7 @@ h3. Misc:
 
 
 
-h3. "More info & link to build instructions":http://en.3dmaking.it/printer_3dm1
+h3. "More info & link to build instructions":http://en.3dmaking.it/printer_3dm1 ( manual is ita only, drop the manual in google translate for the english version :D )
 
 
 h3. Contributors:
@@ -49,15 +49,5 @@ h3. Contributors:
 3DMaking:
 
 @makevoid
-@donpeppe
+@donpeppe (the mithical)
 
-
-h3. ToDo / to publish:
-
-- Include Greg Wade's extruder in the project
-- minitronics box
-- new stls
-- publish stls of variants
-- bigger studs variant (m10 / m12)
-- ball screw variant
-- Z with m5 variant
