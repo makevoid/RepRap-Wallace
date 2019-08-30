@@ -4,7 +4,7 @@ h3. derived from RepRap Wallace
 
 Check the printer on thingiverse:
 
-#### - http://www.thingiverse.com/thing:440134
+**http://www.thingiverse.com/thing:440134**
 
 !http://mkvd.s3.amazonaws.com/pics/3d_printer_3dm1.png!
 
