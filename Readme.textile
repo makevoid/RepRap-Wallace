@@ -2,10 +2,8 @@ h1. RepRap 3DM1
 
 h3. derived from RepRap Wallace
 
-!http://3dmaking.it/img/gallery_home/2.jpg!
+!http://mkvd.s3.amazonaws.com/pics/3d_printer_3dm1.png!
 
-
-!http://uploads.makevoid.com/3dm1_buda.png!
 
 h2. Main changes:
 
